@@ -78,29 +78,5 @@ var main = function () {
  // имитируем клик на первую вкладку, что бы отобразить ее при первоначальной загрузке
  $(".tabs a:first-child span").trigger("click");
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 $(document).ready(main);
 
