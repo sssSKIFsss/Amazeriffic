@@ -134,8 +134,18 @@ var main = function (toDoObjects) {
        $input.val("");
        $tagInput.val("");
      });
-     $content = $("<div>").append($inputLabel).append($input).append($tagLabel).append($tagInput).append($button);
-     $("main .content").append($content);
+   
+  
+   
+   
+   
+   
+   
+   
+   
+   
+    $content = $("<div>").append($inputLabel).append($input).append($tagLabel).append($tagInput).append($button);
+    $("main .content").append($content);
    }
    // возвращается false, так как мы не переходим по ссылке
    return false;
