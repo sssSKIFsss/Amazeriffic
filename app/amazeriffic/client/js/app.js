@@ -36,7 +36,6 @@ var main = function (toDoObjects) {
   // ф-ция map делает итеррацию по всему массиву объектов и возвращает параметр description
   // (описание задачи) без тегов
   var toDos = toDoObjects.map(function (toDo) { return toDo.description; });
-  
   // определение ф-ции-обработчика клика по закладке
   $(".tabs span").toArray().forEach(function (element) {
     $(element).on("click", function () {
@@ -123,16 +122,28 @@ var main = function (toDoObjects) {
 		$tagInput = $("<input>").addClass("tags"),
 		$tagLabel = $("<p>").text("Область деятельности (через запятую): "),
 		$button = $("<button>").text("+");
+
+        // определение ф-ции-обработчика нажатия кнопки
 	    $button.on("click", function () {
+		  // считывание данных с элементов ввода description-input и tags-input
 	      var description = $input.val(),
-		  // разделение в соответствии с запятыми
-		  tags = $tagInput.val().split(",");
-	      toDoObjects.push({"description":description, "tags":tags});
-	      // обновление toDos
-	      toDos = toDoObjects.map(function (toDo) { return toDo.description; });
-	      $input.val("");
-	      $tagInput.val("");
-	    });
+		  tags = $tagInput.val().split(","); // разделение в соответствии с запятыми
+		  // создаем новый элемент списка задач
+		  var newToDo = {"description":"Поболтать с молоденькой продавщицей", "tags":"шопинг"};
+		  
+		  // отправляем сообщение на маршрут списка задач и обрабатываем ответ
+		  $.post("todos", newToDo, function (result) {
+		    // ниже действия после ответа сервера
+			console.log(result);
+			toDoObjects.push(newToDo); // запись считанных данных в объект-хранилище toDoObjects
+		    // обновление toDos
+	      	toDos = toDoObjects.map(function (toDo) { return toDo.description; });
+	      	// очистка полей ввода
+		  	$input.val("");
+	      	$tagInput.val("");
+		  });
+		});
+		// формируем содержание вкладки
     	$content = $("<div>").append($inputLabel).append($input).append($tagLabel).append($tagInput).append($button);
 	    $("main .content").append($content);
       }
