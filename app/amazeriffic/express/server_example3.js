@@ -1,4 +1,3 @@
-
 var express = require("express"),
     http = require("http"),
     app = express(),
@@ -14,7 +13,13 @@ var express = require("express"),
 app.use(express.static("../client"));
 http.createServer(app).listen(3000);
 
-app.get("todos.json", function (req, res) { res.json(toDos); });
+// настроим маршруты
+app.get("/hello", function (req, res) {res.send("Hello, World!");});
+app.get("/goodbye", function (req, res) {res.send("Goodbye, World!");});
+app.get("/todos.json", function (req, res) {res.json(toDos);});
+
+//app.get("todos.json", function (req, res) { res.json(toDos); });
+
 app.post("/todos", function (req, res) {
   console.log("Данные были отправлены на сервер!");
   // простой объект отправлен обратно
